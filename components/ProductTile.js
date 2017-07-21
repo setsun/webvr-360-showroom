@@ -126,6 +126,39 @@ class ProductTile extends React.Component {
     );
   }
 
+  renderBackface() {
+    return (
+      <View
+        style={{
+          backgroundColor: '#8200FA',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 0.05,
+          transform: [
+            {rotateY: 180},
+            {translateZ: 0.05}
+          ]
+        }}
+      >
+        <Text
+          style={{
+            textAlign: 'center',
+            textAlignVertical: 'center',
+            fontWeight: '500',
+            color: '#FFF'
+          }}
+        >
+          Added to Cart!
+        </Text>
+      </View>
+    );
+  }
+
   render () {
     return (
       <Animated.View
@@ -141,34 +174,7 @@ class ProductTile extends React.Component {
             {rotateY: this.state.rotateY}
           ]
         }}>
-        <View
-          style={{
-            backgroundColor: '#8200FA',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 0.05,
-            transform: [
-              {rotateY: 180},
-              {translateZ: 0.05}
-            ]
-          }}
-        >
-          <Text
-            style={{
-              textAlign: 'center',
-              textAlignVertical: 'center',
-              fontWeight: '500',
-              color: '#FFF'
-            }}
-          >
-            Added to Cart!
-          </Text>
-        </View>
+        {this.renderBackface()}
         <View
           style={{
             paddingLeft: 0.05,
