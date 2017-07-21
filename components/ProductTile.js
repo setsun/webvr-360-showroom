@@ -9,33 +9,83 @@ import {
   Animated,
 } from 'react-vr';
 
-class Button extends React.Component {
+/*
+ AddButton Component
+*/
+class AddButton extends React.Component {
   constructor() {
     super();
+
     this.state = {
-      buttonTextColor: '#8200FA',
-      buttonBackgroundColor: '#FFF',
-      translateY: new Animated.Value(0),
-      opacity: new Animated.Value(0),
-      rotateY: new Animated.Value(0),
-      active: false,
+      textColor: '#8200FA',
+      backgroundColor: '#FFF',
     };
+
     this.onButtonEnter = this.onButtonEnter.bind(this);
     this.onButtonExit = this.onButtonExit.bind(this);
   }
 
   onButtonEnter() {
     this.setState({
-      buttonTextColor: '#FFF',
-      buttonBackgroundColor: '#8200FA'
+      textColor: '#FFF',
+      backgroundColor: '#8200FA'
     });
   }
 
   onButtonExit() {
     this.setState({
-      buttonTextColor: '#8200FA',
-      buttonBackgroundColor: '#FFF'
+      textColor: '#8200FA',
+      backgroundColor: '#FFF'
     });
+  }
+
+  render () {
+    const {onClick} = this.props;
+
+    return (
+      <VrButton
+        style={{
+          borderRadius: 0.01,
+          borderWidth: 0.005,
+          backgroundColor: this.state.backgroundColor,
+          borderColor: '#8200FA',
+          padding: 0.05,
+          paddingLeft: 0.1,
+          paddingRight: 0.1,
+        }}
+        onEnter={this.onButtonEnter}
+        onExit={this.onButtonExit}
+        onClick={onClick}
+      >
+        <Text
+          style={{
+            color: this.state.textColor,
+            fontWeight: '500',
+            textAlign: 'center',
+            textAlignVertical: 'center',
+            fontSize: 0.075
+          }}
+        >
+          Add To Cart
+        </Text>
+      </VrButton>
+    );
+  }
+};
+
+/*
+ ProductTile Component
+*/
+class ProductTile extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      translateY: new Animated.Value(0),
+      opacity: new Animated.Value(0),
+      rotateY: new Animated.Value(0),
+      active: false,
+    };
   }
 
   renderProductName() {
@@ -74,39 +124,6 @@ class Button extends React.Component {
         source={this.props.imageSource}
       />
     );
-  }
-
-  renderAddButton() {
-    return (
-      <VrButton
-        style={{
-          borderRadius: 0.01,
-          borderWidth: 0.005,
-          backgroundColor: this.state.buttonBackgroundColor,
-          borderColor: '#8200FA',
-          padding: 0.05,
-          paddingLeft: 0.1,
-          paddingRight: 0.1,
-        }}
-        onEnter={this.onButtonEnter}
-        onExit={this.onButtonExit}
-        onClick={() => {
-          this.setState({active: true});
-        }}
-      >
-        <Text
-          style={{
-            color: this.state.buttonTextColor,
-            fontWeight: '500',
-            textAlign: 'center',
-            textAlignVertical: 'center',
-            fontSize: 0.075
-          }}
-        >
-          Add To Cart
-        </Text>
-      </VrButton>
-    )
   }
 
   render () {
@@ -177,7 +194,7 @@ class Button extends React.Component {
             {this.renderProductPrice()}
           </View>
           <View>
-            {this.renderAddButton()}
+            <AddButton onClick={() => this.setState({active: true})} />
           </View>
         </View>
       </Animated.View>
@@ -221,4 +238,4 @@ class Button extends React.Component {
   }
 };
 
-export default Button;
+export default ProductTile;
