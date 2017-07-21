@@ -10,7 +10,11 @@ import {
 } from 'react-vr';
 
 /*
- AddButton Component
+  AddButton Component
+
+  propTypes: {
+    onClick
+  }
 */
 class AddButton extends React.Component {
   constructor() {
@@ -66,7 +70,13 @@ class AddButton extends React.Component {
 };
 
 /*
- ProductTile Component
+  ProductTile Component
+
+  propTypes: {
+    name,
+    imageSource,
+    price
+  }
 */
 class ProductTile extends React.Component {
   constructor() {
@@ -81,14 +91,20 @@ class ProductTile extends React.Component {
   }
 
   renderProductName() {
+    const {name} = this.props;
+
     return null;
   }
 
   renderProductPrice() {
+    const {price} = this.props;
+
     return null;
   }
 
   renderProductImage() {
+    const {imageSource} = this.props;
+
     return null;
   }
 
