@@ -57,7 +57,7 @@ export default class App extends React.Component {
           return (
             <ProductTile
               key={`${item.itemId}-${item.salePrice}-${item.name}`}
-              imageSource={{uri: `${httpUrl}/${item.image}`}}
+              imageSource={asset(item.image)}
               name={`${item.name.substring(0, 12)}...`}
               price={item.salePrice}
               animationDelay={(index + 1) * 250}
