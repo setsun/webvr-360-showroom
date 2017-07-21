@@ -58,7 +58,6 @@ export default class App extends React.Component {
               imageSource={asset(item.image)}
               name={`${item.name.substring(0, 12)}...`}
               price={item.salePrice}
-              animationDelay={(index + 1) * 250}
             />
           );
         })}

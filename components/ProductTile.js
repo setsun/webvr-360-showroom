@@ -26,17 +26,9 @@ class AddButton extends React.Component {
   }
 
   onButtonEnter() {
-    this.setState({
-      textColor: '#FFF',
-      backgroundColor: '#8200FA'
-    });
   }
 
   onButtonExit() {
-    this.setState({
-      textColor: '#8200FA',
-      backgroundColor: '#FFF'
-    });
   }
 
   render () {
@@ -81,49 +73,23 @@ class ProductTile extends React.Component {
     super();
 
     this.state = {
-      translateY: new Animated.Value(0),
-      opacity: new Animated.Value(0),
-      rotateY: new Animated.Value(0),
+      translateY: null,
+      opacity: null,
+      rotateY: null,
       active: false,
     };
   }
 
   renderProductName() {
-    return (
-      <Text
-        style={{
-          color: '#000',
-          fontSize: 0.075,
-        }}
-      >
-        {this.props.name}
-      </Text>
-    );
+    return null;
   }
 
   renderProductPrice() {
-    return (
-      <Text
-        style={{
-          color: '#000',
-          fontSize: 0.075,
-        }}
-      >
-        {`Price: $${(this.props.price || 0).toFixed(2)}`}
-      </Text>
-    );
+    return null;
   }
 
   renderProductImage() {
-    return (
-      <Image
-        style={{
-          width: .35,
-          height: .35,
-        }}
-        source={this.props.imageSource}
-      />
-    );
+    return null;
   }
 
   renderBackface() {
@@ -141,7 +107,7 @@ class ProductTile extends React.Component {
           padding: 0.05,
           transform: [
             {rotateY: 180},
-            {translateZ: 0.05}
+            {translateZ: 0.1}
           ]
         }}
       >
@@ -163,83 +129,38 @@ class ProductTile extends React.Component {
     return (
       <Animated.View
         style={{
-          position: 'relative',
-          backgroundColor: '#fff',
-          borderColor: '#ccc',
-          borderWidth: 0.005,
-          marginBottom: 0.1,
-          opacity: this.state.opacity,
-          transform: [
-            {translateY: this.state.translateY},
-            {rotateY: this.state.rotateY}
-          ]
         }}>
-        {this.renderBackface()}
         <View
           style={{
-            paddingLeft: 0.05,
-            paddingRight: 0.05,
-            padding: 0.1,
-            paddingTop: 0.1,
-            paddingBottom: 0.1,
           }}
         >
           <View
             style={{
-              alignItems: 'center'
             }}
           >
             {this.renderProductImage()}
           </View>
           <View
             style={{
-              marginBottom: 0.05
             }}
           >
             {this.renderProductName()}
             {this.renderProductPrice()}
           </View>
           <View>
-            <AddButton onClick={() => this.setState({active: true})} />
+            <AddButton onClick={null} />
           </View>
         </View>
+        {this.renderBackface()}
       </Animated.View>
     );
   }
 
   componentDidMount() {
-    this.state.translateY.setValue(1);
-    this.state.opacity.setValue(0);
-    Animated.parallel([
-      Animated.timing(
-        this.state.translateY,
-        {
-          toValue: 0,
-          duration: 750,
-          delay: this.props.animationDelay || 0
-        }
-      ),
-      Animated.timing(
-        this.state.opacity,
-        {
-          toValue: 1,
-          duration: 750,
-          delay: this.props.animationDelay || 0
-        }
-      )
-    ]).start();
   }
 
   componentDidUpdate(_, prevState) {
     if (this.state.active && !prevState.active) {
-      this.state.rotateY.setValue(0);
-      Animated.timing(
-        this.state.rotateY,
-        {
-          toValue: 180,
-          duration: 750
-        }
-      ).start();
     }
   }
 };
