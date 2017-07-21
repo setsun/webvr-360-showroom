@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   AppRegistry,
   asset,
@@ -8,17 +9,14 @@ import {
   View,
   VrButton
 } from 'react-vr';
+
 import ProductTile from './components/ProductTile';
-
 import testData from './data/testData';
-
-const httpUrl = 'http://kevinandthejetsapp.icvrmpzhun.us-east-1.elasticbeanstalk.com';
 
 export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      gridRotateY: 30,
       items: testData
     }
   }
@@ -74,7 +72,7 @@ export default class App extends React.Component {
         <View
           style={{
             transform: [
-              {rotateY: this.state.gridRotateY}
+              {rotateY: 30}
             ]
           }}
         >
